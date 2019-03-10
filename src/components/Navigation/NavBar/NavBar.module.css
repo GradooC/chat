@@ -1,0 +1,10 @@
+.nav {
+  background-color: var(--color-grey-1);
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem 0;
+}

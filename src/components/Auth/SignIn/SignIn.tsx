@@ -1,71 +1,25 @@
 import React from "react";
-// import cn from "classnames";
 import { mergeDeep } from "immutable";
 import checkValidity from "../../../shared/validate";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles
-} from "@material-ui/core/styles";
+import styles from "../styles";
+import { State, Props } from "../types";
 
-const styles = (theme: Theme) =>
-  createStyles({
-    container: {
-      display: "flex",
-      flexWrap: "wrap",
-      flexDirection: "column",
-      alignItems: "center"
-    },
-    textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 200
-    },
-    dense: {
-      marginTop: 20
-    },
-    menu: {
-      width: 200
-    },
-    button: {
-      width: 210,
-      marginTop: theme.spacing.unit * 2,
-      marginBottom: theme.spacing.unit * 3
-    }
-  });
-
-export interface Props extends WithStyles<typeof styles> {}
-
-export interface Validation {
-  required?: boolean;
-  minLength: number;
-}
-
-export interface Input {
-  value: string;
-  validation: Validation;
-  error: string | null;
-}
-
-export interface State {
-  name: Input;
-  password: Input;
-  [key: string]: any;
-}
+import { withStyles } from "@material-ui/core/styles";
 
 class SignIn extends React.Component<Props, State> {
-  state: State = {
+
+  public state: State = {
     name: {
       value: "",
       validation: {
         required: true,
         minLength: 0
       },
-      error: null
+      error: null,
+      isTouched: false
     },
     password: {
       value: "",
@@ -73,11 +27,12 @@ class SignIn extends React.Component<Props, State> {
         required: true,
         minLength: 6
       },
-      error: null
+      error: null,
+      isTouched: false
     }
   };
 
-  handleChange = (field: keyof State) => (
+  private handleChange = (field: keyof State) => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     e.persist();
@@ -87,23 +42,25 @@ class SignIn extends React.Component<Props, State> {
         mergeDeep(prevState, {
           [field]: {
             value: value,
-            error: checkValidity(value, prevState[field].validation)
+            error: checkValidity(value, prevState[field].validation),
+            isTouched: true
           }
         })
     );
   };
 
-  isSubmitDisable = (): boolean => {
-    return !Object.keys(this.state).every(
+
+  private isSubmitDisable = (): boolean => {
+    return ['name', 'password'].some(
       field =>
-        this.state[field].error === null && this.state[field].value !== ""
+        this.state[field].error !== null || !this.state[field].isTouched
     );
   };
 
-  render() {
+  public render() {
     const { name, password } = this.state;
     const {
-      classes: { container, textField, dense, button }
+      classes: { container, button }
     } = this.props;
 
     return (
@@ -114,8 +71,10 @@ class SignIn extends React.Component<Props, State> {
           onChange={this.handleChange("name")}
           margin="normal"
           variant="outlined"
-          helperText={!!name.error ? name.error : "Please enter your name"} // Исправить на явное преобразование
-          error={!!name.error} // Исправить на явное преобразование
+          helperText={
+            name.error === null ? "Please enter your name" : name.error
+          }
+          error={name.error !== null}
         />
         <TextField
           label="Password"
@@ -125,9 +84,11 @@ class SignIn extends React.Component<Props, State> {
           margin="normal"
           variant="outlined"
           helperText={
-            !!password.error ? password.error : "Please enter your password"
-          } // Исправить на явное преобразование
-          error={!!password.error} // Исправить на явное преобразование
+            password.error === null
+              ? "Please enter your password"
+              : password.error
+          }
+          error={password.error !== null}
         />
         <Button
           variant="contained"

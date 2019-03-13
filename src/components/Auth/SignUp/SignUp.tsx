@@ -1,73 +1,28 @@
 import React from "react";
-// import cn from "classnames";
 import { mergeDeep } from "immutable";
 import checkValidity from "../../../shared/validate";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import styles from "../styles";
 
-import {
-  createStyles,
-  Theme,
-  withStyles,
-  WithStyles
-} from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
+import { Props, State, Input } from "../types";
 
-const styles = (theme: Theme) =>
-  createStyles({
-    container: {
-      display: "flex",
-      flexWrap: "wrap",
-      flexDirection: "column",
-      alignItems: "center"
-    },
-    textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 200
-    },
-    dense: {
-      marginTop: 20
-    },
-    menu: {
-      width: 200
-    },
-    button: {
-      width: 210,
-      marginTop: theme.spacing.unit * 2,
-      marginBottom: theme.spacing.unit * 3
-    }
-  });
-
-export interface Props extends WithStyles<typeof styles> {}
-
-export interface Validation {
-  required?: boolean;
-  isSame?: boolean;
-  minLength: number;
-}
-
-export interface Input {
-  value: string;
-  validation: Validation;
-  error: string | null;
-}
-
-export interface State {
-  name: Input;
-  password: Input;
+interface SignUpState extends State {
   confirmPassword: Input;
-  [key: string]: any;
 }
 
-class SignUp extends React.Component<Props, State> {
-  state: State = {
+class SignUp extends React.Component<Props, SignUpState> {
+
+  public state: SignUpState = {
     name: {
       value: "",
       validation: {
         required: true,
         minLength: 0
       },
-      error: null
+      error: null,
+      isTouched: false
     },
     password: {
       value: "",
@@ -75,7 +30,8 @@ class SignUp extends React.Component<Props, State> {
         required: true,
         minLength: 6
       },
-      error: null
+      error: null,
+      isTouched: false
     },
     confirmPassword: {
       value: "",
@@ -84,18 +40,19 @@ class SignUp extends React.Component<Props, State> {
         minLength: 0,
         isSame: true
       },
-      error: null
+      error: null,
+      isTouched: false
     }
   };
 
-  isSubmitDisable = (): boolean => {
-    return !Object.keys(this.state).every(
+  private isSubmitDisable = (): boolean => {
+    return ['name', 'password', 'confirmPassword'].some(
       field =>
-        this.state[field].error === null && this.state[field].value !== ""
+        this.state[field].error !== null || !this.state[field].isTouched
     );
   };
 
-  handleChange = (field: keyof State) => (
+  private handleChange = (field: keyof State) => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     e.persist();
@@ -109,17 +66,17 @@ class SignUp extends React.Component<Props, State> {
               value,
               prevState[field].validation,
               prevState.password.value
-            )
+            ),
+            isTouched: true
           }
         })
     );
   };
 
-  render() {
-    console.log(this.state);
+  public render() {
     const { name, password, confirmPassword } = this.state;
     const {
-      classes: { container, textField, dense, button }
+      classes: { container, button }
     } = this.props;
 
     return (
@@ -130,8 +87,10 @@ class SignUp extends React.Component<Props, State> {
           onChange={this.handleChange("name")}
           margin="normal"
           variant="outlined"
-          helperText={!!name.error ? name.error : "Please enter your name"} // Исправить на явное преобразование
-          error={!!name.error} // Исправить на явное преобразование
+          helperText={
+            name.error === null ? "Please enter your name" : name.error
+          }
+          error={!!name.error}
         />
         <TextField
           label="Password"
@@ -141,9 +100,11 @@ class SignUp extends React.Component<Props, State> {
           margin="normal"
           variant="outlined"
           helperText={
-            !!password.error ? password.error : "Please enter your password"
-          } // Исправить на явное преобразование
-          error={!!password.error} // Исправить на явное преобразование
+            password.error === null
+              ? "Please enter your password"
+              : password.error
+          }
+          error={password.error !== null}
         />
         <TextField
           label="Confirm Password"
@@ -153,11 +114,11 @@ class SignUp extends React.Component<Props, State> {
           margin="normal"
           variant="outlined"
           helperText={
-            !!confirmPassword.error // Исправить на явное преобразование
-              ? confirmPassword.error
-              : "Please repeat your password"
+            confirmPassword.error === null
+              ? "Please repeat your password"
+              : confirmPassword.error
           }
-          error={!!confirmPassword.error} // Исправить на явное преобразование
+          error={confirmPassword.error !== null}
         />
         <Button
           variant="contained"

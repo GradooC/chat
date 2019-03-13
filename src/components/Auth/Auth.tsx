@@ -7,6 +7,7 @@ import SignUp from "./SignUp/SignUp";
 
 import classes from "./Auth.module.css";
 import { Paper } from "@material-ui/core";
+import { TabsTypes } from "./types";
 
 interface AuthProps {}
 
@@ -18,7 +19,7 @@ const Auth: React.FunctionComponent<AuthProps> = () => {
       <AppBar position="static" color="default">
         <Tabs
           value={value}
-          onChange={(e: React.ChangeEvent<{}>, value: any) => setValue(value)}
+          onChange={(e: React.ChangeEvent<{}>, value: TabsTypes) => setValue(value)}
           indicatorColor="primary"
           textColor="primary"
           variant="fullWidth"

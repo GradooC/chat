@@ -1,13 +1,10 @@
-import { Validation } from "../components/Auth/SignIn/SignIn";
+import { Validation } from "../components/Auth/types";
 
 const checkValidity = (
   value: string,
   rules: Validation,
   sample?: string | undefined
 ): string | null => {
-
-  console.log(`value ${value}`);
-  console.log(`sample ${sample}`);
   const rulesMap = [
     {
       type: "required",

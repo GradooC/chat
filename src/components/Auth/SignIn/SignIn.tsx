@@ -1,17 +1,24 @@
 import React from "react";
 import { mergeDeep } from "immutable";
+
 import checkValidity from "../../../shared/validate";
+import styles from "../styles";
+import { Input } from "../types";
+
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { withStyles, WithStyles } from "@material-ui/core/styles";
 
-import styles from "../styles";
-import { State, Props } from "../types";
+export interface SignInState {
+  name: Input;
+  password: Input;
+  [key: string]: Input;
+}
 
-import { withStyles } from "@material-ui/core/styles";
+export interface SignInProps extends WithStyles<typeof styles> {}
 
-class SignIn extends React.Component<Props, State> {
-
-  public state: State = {
+class SignIn extends React.Component<SignInProps, SignInState> {
+  public state: SignInState = {
     name: {
       value: "",
       validation: {
@@ -32,13 +39,13 @@ class SignIn extends React.Component<Props, State> {
     }
   };
 
-  private handleChange = (field: keyof State) => (
+  private handleChange = (field: keyof SignInState) => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     e.persist();
     const { value } = e.target;
     this.setState(
-      (prevState: State): State =>
+      (prevState: SignInState): SignInState =>
         mergeDeep(prevState, {
           [field]: {
             value: value,
@@ -49,11 +56,9 @@ class SignIn extends React.Component<Props, State> {
     );
   };
 
-
   private isSubmitDisable = (): boolean => {
-    return ['name', 'password'].some(
-      field =>
-        this.state[field].error !== null || !this.state[field].isTouched
+    return ["name", "password"].some(
+      field => this.state[field].error !== null || !this.state[field].isTouched
     );
   };
 

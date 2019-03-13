@@ -7,7 +7,11 @@ import SignUp from "./SignUp/SignUp";
 
 import classes from "./Auth.module.css";
 import { Paper } from "@material-ui/core";
-import { TabsTypes } from "./types";
+
+export enum TabsTypes {
+  sign_in,
+  sign_up
+}
 
 interface AuthProps {}
 
@@ -28,8 +32,8 @@ const Auth: React.FunctionComponent<AuthProps> = () => {
           <Tab label="sign up" />
         </Tabs>
       </AppBar>
-      {value === 0 && <SignIn />}
-      {value === 1 && <SignUp />}
+      {value === TabsTypes.sign_in && <SignIn />}
+      {value === TabsTypes.sign_up && <SignUp />}
     </Paper>
   );
 };

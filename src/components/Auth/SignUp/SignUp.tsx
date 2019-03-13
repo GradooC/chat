@@ -5,14 +5,19 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../styles";
 
-import { withStyles } from "@material-ui/core/styles";
-import { Props, State, Input } from "../types";
+import { withStyles, WithStyles } from "@material-ui/core/styles";
+import { Input } from "../types";
 
-interface SignUpState extends State {
+interface SignUpState {
+  name: Input;
+  password: Input;
   confirmPassword: Input;
+  [key: string]: Input;
 }
 
-class SignUp extends React.Component<Props, SignUpState> {
+export interface SignUpProps extends WithStyles<typeof styles> {}
+
+class SignUp extends React.Component<SignUpProps, SignUpState> {
 
   public state: SignUpState = {
     name: {
@@ -52,13 +57,13 @@ class SignUp extends React.Component<Props, SignUpState> {
     );
   };
 
-  private handleChange = (field: keyof State) => (
+  private handleChange = (field: keyof SignUpState) => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     e.persist();
     const { value } = e.target;
     this.setState(
-      (prevState: State): State =>
+      (prevState: SignUpState): SignUpState =>
         mergeDeep(prevState, {
           [field]: {
             value: value,
@@ -90,7 +95,7 @@ class SignUp extends React.Component<Props, SignUpState> {
           helperText={
             name.error === null ? "Please enter your name" : name.error
           }
-          error={!!name.error}
+          error={name.error !== null}
         />
         <TextField
           label="Password"

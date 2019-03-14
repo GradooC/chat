@@ -1,13 +1,15 @@
 import React from "react";
 import { mergeDeep } from "immutable";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { withStyles, WithStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 import checkValidity from "../../../shared/validate";
 import styles from "../styles";
 import { Input } from "../types";
-
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { withStyles, WithStyles } from "@material-ui/core/styles";
+import * as actions from "../../../store/actions/auth";
 
 export interface SignInState {
   name: Input;
@@ -68,6 +70,8 @@ class SignIn extends React.Component<SignInProps, SignInState> {
       classes: { container, button }
     } = this.props;
 
+    console.log(this.props);
+
     return (
       <form className={container} noValidate autoComplete="off">
         <TextField
@@ -108,4 +112,16 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   }
 }
 
-export default withStyles(styles)(SignIn);
+const mapStateToProps = (state: any) => ({
+  // Заменить на тип rootState
+  test: state.test
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onSignIn: () => dispatch(actions.signIn())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SignIn));

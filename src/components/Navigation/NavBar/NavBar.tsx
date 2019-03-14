@@ -10,10 +10,10 @@ const NavBar: React.FunctionComponent<NavBarProps> = props => {
 
   return (
     <ul className={nav}>
-      <NavItem link="auth">SignIn</NavItem>
-      <NavItem link="serch">Search User</NavItem>
-      <NavItem link="chats">Chat List</NavItem>
-      <NavItem link="dialog">Dialog</NavItem>
+      <NavItem link="/auth/sign-in">SignIn</NavItem>
+      <NavItem link="/search">Search User</NavItem>
+      <NavItem link="/chats">Chat List</NavItem>
+      <NavItem link="/dialog">Dialog</NavItem>
     </ul>
   );
 };

@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --color-primary: #eb2f64;
   --color-grey-1: #333;
   --color-grey-2: #777;
@@ -9,9 +9,9 @@
 * {
   margin: 0;
   padding: 0;
-}
+} */
 
-*,
+/* *,
 *::after,
 *::before {
   box-sizing: inherit;
@@ -27,4 +27,4 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   font-size: 1.6rem;
-}
+} */

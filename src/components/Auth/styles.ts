@@ -1,7 +1,4 @@
-import {
-  createStyles,
-  Theme
-} from "@material-ui/core/styles";
+import { createStyles, Theme } from "@material-ui/core/styles";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -18,4 +15,4 @@ const styles = (theme: Theme) =>
     }
   });
 
-  export default styles;
+export default styles;

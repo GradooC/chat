@@ -9,7 +9,8 @@ import { Dispatch } from "redux";
 import checkValidity from "../../../shared/validate";
 import styles from "../styles";
 import { Input } from "../types";
-import * as actions from "../../../store/actions/auth";
+import * as actions from "../../../store/auth/actions";
+import { AppState } from "../../../store/store";
 
 export interface SignInState {
   name: Input;
@@ -112,13 +113,12 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  // Заменить на тип rootState
-  test: state.test
+const mapStateToProps = (state: AppState) => ({
+  test: state.auth.test
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSignIn: () => dispatch(actions.signIn())
+  onSignIn: () => dispatch(actions.signInSuccess())
 });
 
 export default connect(

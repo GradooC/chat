@@ -9,7 +9,8 @@ import styles from "../styles";
 
 import { Input } from "../types";
 import checkValidity from "../../../shared/validate";
-import * as actions from '../../../store/actions/auth';
+import * as actions from '../../../store/auth/actions';
+import { AppState } from "../../../store/store";
 
 interface SignUpState {
   name: Input;
@@ -142,13 +143,12 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  // Заменить на тип rootState
-  test: state.test
+const mapStateToProps = (state: AppState) => ({
+  test: state.auth.test
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSignUp: () => dispatch(actions.signUp())
+  onSignUp: () => dispatch(actions.signUpSuccess())
 });
 
 export default connect(

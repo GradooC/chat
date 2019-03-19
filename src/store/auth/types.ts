@@ -13,7 +13,6 @@ export interface AuthState {
 export interface UserData {
   name: string;
   password: string;
-  test: number; // test
 }
 
 interface SignInRequestAction {

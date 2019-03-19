@@ -8,31 +8,61 @@ import {
   UserData
 } from "./types";
 
-export const signInRequest = (userData: UserData) => ({
-  type: SIGN_IN_REQUEST,
-  payload: userData
+import { ThunkAction } from "redux-thunk";
+import { Action } from "redux";
+import { AppState } from "../store";
+import axios from "axios";
+
+const signInRequest = (): Action => ({
+  type: SIGN_IN_REQUEST
 });
 
-export const signInSuccess = () => ({
-  type: SIGN_IN_SUCCESS,
+const signInSuccess = (): Action => ({
+  type: SIGN_IN_SUCCESS
 });
 
-export const signInFailure = () => ({
-  type: SIGN_IN_FAILURE,
+const signInFailure = (): Action => ({
+  type: SIGN_IN_FAILURE
 });
 
-export const signUpRequest = (userData: UserData) => ({
-  type: SIGN_UP_REQUEST,
-  payload: userData
+const signUpRequest = (): Action => ({
+  type: SIGN_UP_REQUEST
 });
 
-export const signUpSuccess = () => ({
-  type: SIGN_UP_SUCCESS,
+const signUpSuccess = (): Action => ({
+  type: SIGN_UP_SUCCESS
 });
 
-export const signUpFailure = () => ({
-  type: SIGN_UP_FAILURE,
+const signUpFailure = (): Action => ({
+  type: SIGN_UP_FAILURE
 });
 
+export const signIn = (
+  userData: UserData
+): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+  dispatch(signInRequest());
+  try {
+    const res = await axios.get("http://localhost:3001/users");
+    console.log(res);
+    dispatch(signInSuccess());
+  } catch (e) {
+    dispatch(signInFailure());
+  }
+};
 
+export type SignIn = typeof signIn;
 
+export const signUp = (
+  userData: UserData
+): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
+  dispatch(signUpRequest());
+  try {
+    const res = await axios.post("http://localhost:3001/users", userData);
+    dispatch(signUpSuccess());
+    console.log(res);
+  } catch (e) {
+    dispatch(signUpFailure());
+  }
+};
+
+export type SignUp = typeof signUp;

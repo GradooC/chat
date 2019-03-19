@@ -19,13 +19,13 @@ const authReducer = (
 ): AuthState => {
   switch (action.type) {
     case SIGN_IN_REQUEST:
-      return { test: state.test + action.payload.test }; //test
+      return state;
     case SIGN_IN_SUCCESS:
       return state;
     case SIGN_IN_FAILURE:
       return state;
     case SIGN_UP_REQUEST:
-      return { test: state.test - action.payload.test }; //test
+      return state;
     case SIGN_UP_SUCCESS:
       return state;
     case SIGN_UP_FAILURE:

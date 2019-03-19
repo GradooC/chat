@@ -4,13 +4,15 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles, WithStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import { Dispatch, Action } from "redux";
 
 import checkValidity from "../../../shared/validate";
 import styles from "../styles";
 import { Input } from "../types";
 import * as actions from "../../../store/auth/actions";
 import { AppState } from "../../../store/store";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { UserData } from "../../../store/auth/types";
 
 export interface SignInState {
   name: Input;
@@ -18,7 +20,9 @@ export interface SignInState {
   [key: string]: Input;
 }
 
-export interface SignInProps extends WithStyles<typeof styles> {}
+export interface SignInProps extends WithStyles<typeof styles> {
+  onSignIn: actions.SignIn;
+}
 
 class SignIn extends React.Component<SignInProps, SignInState> {
   public state: SignInState = {
@@ -65,16 +69,23 @@ class SignIn extends React.Component<SignInProps, SignInState> {
     );
   };
 
+  private handleSignInButton = (): void => {
+    const { name, password } = this.state;
+    const userData = {
+      name: name.value,
+      password: password.value
+    }
+    this.props.onSignIn(userData);
+  }
+
   public render() {
     const { name, password } = this.state;
     const {
       classes: { container, button }
     } = this.props;
 
-    console.log(this.props);
-
     return (
-      <form className={container} noValidate autoComplete="off">
+      <form className={container} noValidate autoComplete="off" >
         <TextField
           label="Name"
           value={name.value}
@@ -105,6 +116,7 @@ class SignIn extends React.Component<SignInProps, SignInState> {
           color="primary"
           className={button}
           disabled={this.isSubmitDisable()}
+          onClick={this.handleSignInButton}
         >
           Sign In
         </Button>
@@ -113,12 +125,13 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   }
 }
 
+
 const mapStateToProps = (state: AppState) => ({
   test: state.auth.test
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSignIn: () => dispatch(actions.signInSuccess())
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
+  onSignIn: (userData: UserData) => dispatch(actions.signIn(userData)),
 });
 
 export default connect(

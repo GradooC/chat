@@ -5,7 +5,6 @@ import Tab from "@material-ui/core/Tab";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 
-// import classes from "./Auth.module.css";
 import { Paper } from "@material-ui/core";
 import {
   RouteComponentProps,
@@ -32,7 +31,7 @@ const styles = (theme: Theme) =>
 interface AuthProps extends RouteComponentProps, WithStyles<typeof styles> {}
 
 const Auth: React.FunctionComponent<AuthProps> = props => {
-  console.log(props);
+
   const { match, classes } = props;
 
   const handleChange = (e: React.ChangeEvent<{}>, val: string): void => {

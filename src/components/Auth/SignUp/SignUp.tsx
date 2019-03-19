@@ -11,6 +11,8 @@ import { Input } from "../types";
 import checkValidity from "../../../shared/validate";
 import * as actions from '../../../store/auth/actions';
 import { AppState } from "../../../store/store";
+import { ThunkDispatch } from "redux-thunk";
+import { UserData } from "../../../store/auth/types";
 
 interface SignUpState {
   name: Input;
@@ -19,7 +21,9 @@ interface SignUpState {
   [key: string]: Input;
 }
 
-export interface SignUpProps extends WithStyles<typeof styles> {}
+export interface SignUpProps extends WithStyles<typeof styles> {
+  onSignUp: actions.SignUp;
+}
 
 class SignUp extends React.Component<SignUpProps, SignUpState> {
 
@@ -82,15 +86,24 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
     );
   };
 
+  private handleSignUpButton = () => {
+    const { name, password } = this.state;
+    const userData = {
+      name: name.value,
+      password: password.value
+    }
+    this.props.onSignUp(userData);
+  }
+
   public render() {
     const { name, password, confirmPassword } = this.state;
     const {
       classes: { container, button }
     } = this.props;
 
-    console.log(this.props);
+    // console.log(this.props);
     return (
-      <form className={container} noValidate autoComplete="off">
+      <form className={container} noValidate autoComplete="off" >
         <TextField
           label="Name"
           value={name.value}
@@ -135,6 +148,7 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
           color="primary"
           className={button}
           disabled={this.isSubmitDisable()}
+          onClick={this.handleSignUpButton}
         >
           Sign Up
         </Button>
@@ -147,8 +161,8 @@ const mapStateToProps = (state: AppState) => ({
   test: state.auth.test
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSignUp: () => dispatch(actions.signUpSuccess())
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
+  onSignUp: (userData: UserData) => dispatch(actions.signUp(userData)),
 });
 
 export default connect(

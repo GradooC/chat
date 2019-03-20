@@ -4,7 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles, WithStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
 import styles from "../styles";
 
 import { Input } from "../types";
@@ -12,7 +11,7 @@ import checkValidity from "../../../shared/validate";
 import * as actions from '../../../store/auth/actions';
 import { AppState } from "../../../store/store";
 import { ThunkDispatch } from "redux-thunk";
-import { UserData } from "../../../store/auth/types";
+import { UserData, RequestStatus } from "../../../store/auth/types";
 
 interface SignUpState {
   name: Input;
@@ -23,6 +22,7 @@ interface SignUpState {
 
 export interface SignUpProps extends WithStyles<typeof styles> {
   onSignUp: actions.SignUp;
+  reqStatus: RequestStatus;
 }
 
 class SignUp extends React.Component<SignUpProps, SignUpState> {
@@ -101,7 +101,7 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
       classes: { container, button }
     } = this.props;
 
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <form className={container} noValidate autoComplete="off" >
         <TextField
@@ -152,13 +152,14 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
         >
           Sign Up
         </Button>
+        <p>{this.props.reqStatus}</p> {/*TEST */}
       </form>
     );
   }
 }
 
 const mapStateToProps = (state: AppState) => ({
-  test: state.auth.test
+  reqStatus: state.auth.reqSignUpStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({

@@ -10,7 +10,9 @@ import {
 } from "./types";
 
 const initialState: AuthState = {
-  test: 10
+  isAuthenticated: false,
+  reqSignInStatus: "none",
+  reqSignUpStatus: "none"
 };
 
 const authReducer = (
@@ -19,17 +21,17 @@ const authReducer = (
 ): AuthState => {
   switch (action.type) {
     case SIGN_IN_REQUEST:
-      return state;
+      return { ...state, reqSignInStatus: "requested" };
     case SIGN_IN_SUCCESS:
-      return state;
+      return { ...state, reqSignInStatus: "successed", isAuthenticated: true };
     case SIGN_IN_FAILURE:
-      return state;
+      return { ...state, reqSignInStatus: "faild" };
     case SIGN_UP_REQUEST:
-      return state;
+      return { ...state, reqSignUpStatus: "requested" };
     case SIGN_UP_SUCCESS:
-      return state;
+      return { ...state, reqSignUpStatus: "successed" };
     case SIGN_UP_FAILURE:
-      return state;
+      return { ...state, reqSignUpStatus: "faild" };
     default:
       return state;
   }

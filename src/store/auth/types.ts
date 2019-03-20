@@ -6,8 +6,12 @@ export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 
+export type RequestStatus = 'requested' | 'successed' | 'faild' | 'none';
+
 export interface AuthState {
-  test: number // test
+  isAuthenticated: boolean;
+  reqSignInStatus: RequestStatus;
+  reqSignUpStatus: RequestStatus;
 }
 
 export interface UserData {

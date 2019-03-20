@@ -7,6 +7,7 @@ import {
   SIGN_UP_SUCCESS,
   UserData
 } from "./types";
+import routes from '../../routes';
 
 import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
@@ -42,9 +43,13 @@ export const signIn = (
 ): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
   dispatch(signInRequest());
   try {
-    const res = await axios.get("http://localhost:3001/users");
-    console.log(res);
-    dispatch(signInSuccess());
+    const res = await axios.get(routes.signInRoute());
+    console.log(res); // TEST
+    if (res.status === 200) {
+      dispatch(signInSuccess());
+    } else {
+      dispatch(signInFailure());
+    }
   } catch (e) {
     dispatch(signInFailure());
   }
@@ -57,9 +62,13 @@ export const signUp = (
 ): ThunkAction<void, AppState, null, Action<string>> => async dispatch => {
   dispatch(signUpRequest());
   try {
-    const res = await axios.post("http://localhost:3001/users", userData);
-    dispatch(signUpSuccess());
-    console.log(res);
+    const res = await axios.get(routes.signUpRoute(), /*userData*/);
+    console.log(res);  // TEST
+    if (res.status === 200) {
+      dispatch(signUpSuccess());
+    } else {
+      dispatch(signUpFailure());
+    }
   } catch (e) {
     dispatch(signUpFailure());
   }

@@ -11,7 +11,8 @@ import { Input } from "../types";
 import * as actions from "../../../store/auth/actions";
 import { AppState } from "../../../store/store";
 import { ThunkDispatch } from "redux-thunk";
-import { UserData, RequestStatus } from "../../../store/auth/types";
+import { UserData } from "../../../store/auth/types";
+import { RequestStatus } from "../../../store/store";
 
 export interface SignInState {
   name: Input;

@@ -5,8 +5,7 @@ export const SIGN_IN_FAILURE = "SIGN_IN_FAILURE";
 export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
-
-export type RequestStatus = 'requested' | 'successed' | 'faild' | 'none';
+import { RequestStatus } from "../store";
 
 export interface AuthState {
   isAuthenticated: boolean;

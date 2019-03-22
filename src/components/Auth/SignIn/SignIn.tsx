@@ -20,8 +20,8 @@ export interface SignInState {
 }
 
 export interface SignInProps extends WithStyles<typeof styles> {
-  onSignIn: actions.SignIn;
-  reqStatus: RequestStatus;
+  signIn: actions.SignIn;
+  requestStatus: RequestStatus;
   isSignIn: boolean;
 }
 
@@ -76,7 +76,7 @@ class SignIn extends React.Component<SignInProps, SignInState> {
       name: name.value,
       password: password.value
     }
-    this.props.onSignIn(userData);
+    this.props.signIn(userData);
   }
 
   public render() {
@@ -84,8 +84,6 @@ class SignIn extends React.Component<SignInProps, SignInState> {
     const {
       classes: { container, button }
     } = this.props;
-
-    console.log(this.props);
 
     return (
       <form className={container} noValidate autoComplete="off" >
@@ -123,8 +121,6 @@ class SignIn extends React.Component<SignInProps, SignInState> {
         >
           Sign In
         </Button>
-        {this.props.isSignIn ? <p>You are sign in</p>: null} {/*TEST */}
-        <p>{this.props.reqStatus}</p> {/*TEST */}
       </form>
     );
   }
@@ -132,12 +128,12 @@ class SignIn extends React.Component<SignInProps, SignInState> {
 
 
 const mapStateToProps = (state: AppState) => ({
-  reqStatus: state.auth.reqSignInStatus,
+  requestStatus: state.auth.reqSignInStatus,
   isSignIn: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
-  onSignIn: (userData: UserData) => dispatch(actions.signIn(userData)),
+  signIn: (userData: UserData) => dispatch(actions.signIn(userData)),
 });
 
 export default connect(

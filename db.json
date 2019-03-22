@@ -1,6 +1,6 @@
 {
-  "sign_in": {},
-  "sign_up": {},
+  "sign_in": { "status": "ok" },
+  "sign_up": { "status": "ok" },
   "users": [
     {
       "id": 1,

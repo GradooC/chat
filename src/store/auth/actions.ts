@@ -44,7 +44,6 @@ export const signIn = (
   dispatch(signInRequest());
   try {
     const res = await axios.get(routes.signInRoute());
-    console.log(res); // TEST
     if (res.status === 200) {
       dispatch(signInSuccess());
     } else {
@@ -63,7 +62,6 @@ export const signUp = (
   dispatch(signUpRequest());
   try {
     const res = await axios.get(routes.signUpRoute(), /*userData*/);
-    console.log(res);  // TEST
     if (res.status === 200) {
       dispatch(signUpSuccess());
     } else {

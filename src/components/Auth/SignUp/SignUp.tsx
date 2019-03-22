@@ -21,8 +21,8 @@ interface SignUpState {
 }
 
 export interface SignUpProps extends WithStyles<typeof styles> {
-  onSignUp: actions.SignUp;
-  reqStatus: RequestStatus;
+  signUp: actions.SignUp;
+  requestStatus: RequestStatus;
 }
 
 class SignUp extends React.Component<SignUpProps, SignUpState> {
@@ -92,7 +92,7 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
       name: name.value,
       password: password.value
     }
-    this.props.onSignUp(userData);
+    this.props.signUp(userData);
   }
 
   public render() {
@@ -101,7 +101,6 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
       classes: { container, button }
     } = this.props;
 
-    console.log(this.props);
     return (
       <form className={container} noValidate autoComplete="off" >
         <TextField
@@ -152,18 +151,17 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
         >
           Sign Up
         </Button>
-        <p>{this.props.reqStatus}</p> {/*TEST */}
       </form>
     );
   }
 }
 
 const mapStateToProps = (state: AppState) => ({
-  reqStatus: state.auth.reqSignUpStatus,
+  requestStatus: state.auth.reqSignUpStatus,
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
-  onSignUp: (userData: UserData) => dispatch(actions.signUp(userData)),
+  signUp: (userData: UserData) => dispatch(actions.signUp(userData)),
 });
 
 export default connect(

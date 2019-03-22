@@ -1,41 +1,63 @@
-import React, { useState } from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 
-import classes from "./Auth.module.css";
 import { Paper } from "@material-ui/core";
+import {
+  RouteComponentProps,
+  Switch,
+  Route,
+  withRouter
+} from "react-router-dom";
 
-export enum TabsTypes {
-  sign_in,
-  sign_up
-}
+import {
+  createStyles,
+  Theme,
+  WithStyles,
+  withStyles
+} from "@material-ui/core/styles";
 
-interface AuthProps {}
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      width: 400,
+      margin: "1rem auto"
+    }
+  });
 
-const Auth: React.FunctionComponent<AuthProps> = () => {
-  const [value, setValue] = useState(0);
+interface AuthProps extends RouteComponentProps, WithStyles<typeof styles> {}
+
+const Auth: React.FunctionComponent<AuthProps> = props => {
+
+  const { match, classes } = props;
+
+  const handleChange = (e: React.ChangeEvent<{}>, val: string): void => {
+    props.history.push(`${val}`);
+  };
 
   return (
     <Paper className={classes.root} elevation={20}>
       <AppBar position="static" color="default">
         <Tabs
-          value={value}
-          onChange={(e: React.ChangeEvent<{}>, value: TabsTypes) => setValue(value)}
+          value={props.history.location.pathname}
+          onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
           variant="fullWidth"
         >
-          <Tab label="sign in" />
-          <Tab label="sign up" />
+          <Tab label="sign in" value={`${match.url}/sign-in`} />
+          <Tab label="sign up" value={`${match.url}/sign-up`} />
         </Tabs>
       </AppBar>
-      {value === TabsTypes.sign_in && <SignIn />}
-      {value === TabsTypes.sign_up && <SignUp />}
+      <Switch>
+        <Route path={`${match.url}/sign-in`} component={SignIn} />
+        <Route path={`${match.url}/sign-up`} component={SignUp} />
+      </Switch>
     </Paper>
   );
 };
 
-export default Auth;
+export default withRouter(withStyles(styles)(Auth));

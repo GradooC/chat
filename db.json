@@ -1,0 +1,26 @@
+{
+  "sign_in": { "status": "ok" },
+  "sign_up": { "status": "ok" },
+  "users": [
+    {
+      "id": 1,
+      "name": "Vasia",
+      "password": "qwerty"
+    },
+    {
+      "id": 2,
+      "name": "Petia",
+      "password": "12345"
+    },
+    {
+      "id": 3,
+      "name": "Olya",
+      "password": "54321"
+    },
+    {
+      "name": "1",
+      "password": "111111",
+      "id": 4
+    }
+  ]
+}

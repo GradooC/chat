@@ -1,13 +1,17 @@
 import React from "react";
 import { mergeDeep } from "immutable";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { withStyles, WithStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 
 import checkValidity from "../../../shared/validate";
 import styles from "../styles";
 import { Input } from "../types";
-
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { withStyles, WithStyles } from "@material-ui/core/styles";
+import * as actions from "../../../store/auth/actions";
+import { AppState } from "../../../store/store";
+import { ThunkDispatch } from "redux-thunk";
+import { UserData, RequestStatus } from "../../../store/auth/types";
 
 export interface SignInState {
   name: Input;
@@ -15,7 +19,11 @@ export interface SignInState {
   [key: string]: Input;
 }
 
-export interface SignInProps extends WithStyles<typeof styles> {}
+export interface SignInProps extends WithStyles<typeof styles> {
+  signIn: actions.SignIn;
+  requestStatus: RequestStatus;
+  isSignIn: boolean;
+}
 
 class SignIn extends React.Component<SignInProps, SignInState> {
   public state: SignInState = {
@@ -62,6 +70,15 @@ class SignIn extends React.Component<SignInProps, SignInState> {
     );
   };
 
+  private handleSignInButton = (): void => {
+    const { name, password } = this.state;
+    const userData = {
+      name: name.value,
+      password: password.value
+    }
+    this.props.signIn(userData);
+  }
+
   public render() {
     const { name, password } = this.state;
     const {
@@ -69,7 +86,7 @@ class SignIn extends React.Component<SignInProps, SignInState> {
     } = this.props;
 
     return (
-      <form className={container} noValidate autoComplete="off">
+      <form className={container} noValidate autoComplete="off" >
         <TextField
           label="Name"
           value={name.value}
@@ -100,6 +117,7 @@ class SignIn extends React.Component<SignInProps, SignInState> {
           color="primary"
           className={button}
           disabled={this.isSubmitDisable()}
+          onClick={this.handleSignInButton}
         >
           Sign In
         </Button>
@@ -108,4 +126,17 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   }
 }
 
-export default withStyles(styles)(SignIn);
+
+const mapStateToProps = (state: AppState) => ({
+  requestStatus: state.auth.reqSignInStatus,
+  isSignIn: state.auth.isAuthenticated
+});
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
+  signIn: (userData: UserData) => dispatch(actions.signIn(userData)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SignIn));

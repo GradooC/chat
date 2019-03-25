@@ -1,6 +1,7 @@
 export const FETCH_USERS_REQUEST = "FETCH_USERS_REQUEST";
 export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
 export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE";
+export const HANDLE_SEARCH_INPUT = 'HANDLE_SEARCH_INPUT';
 import { RequestStatus } from "../store";
 
 export interface UserInfo {
@@ -11,9 +12,10 @@ export interface UserInfo {
   gender: string;
 }
 
-export interface SearchUserState {
+export interface UsersState {
   users: Array<UserInfo>;
   requestStatus: RequestStatus;
+  searchValue: string;
 }
 
 interface fetchUsersRequestAction {
@@ -29,7 +31,13 @@ interface fetchUsersFailureAction {
   type: typeof FETCH_USERS_FAILURE;
 }
 
-export type SearchUsersActions =
+interface handleSeacrhInput {
+  type: typeof HANDLE_SEARCH_INPUT;
+  payload: string; 
+}
+
+export type UsersActions =
   | fetchUsersRequestAction
   | fetchUsersSuccessAction
-  | fetchUsersFailureAction;
+  | fetchUsersFailureAction
+  | handleSeacrhInput;

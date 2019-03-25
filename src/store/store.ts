@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducet = combineReducers({
   auth: authReducer,
-  searchUser: searchUserReducer
+  users: searchUserReducer
 });
 
 const store = createStore(rootReducet, composeWithDevTools(applyMiddleware(thunk)));

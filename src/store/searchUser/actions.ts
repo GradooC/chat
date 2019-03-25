@@ -1,35 +1,41 @@
 import {
-  SearchUsersActions,
+  UsersActions,
   FETCH_USERS_REQUEST,
   FETCH_USERS_FAILURE,
   FETCH_USERS_SUCCESS,
-  SearchUserState,
+  HANDLE_SEARCH_INPUT,
+  UsersState,
   UserInfo
 } from "./types";
 import { ThunkAction } from "redux-thunk";
 import routes from "../../routes";
 import axios from "axios";
 
-export const fetchUsersRequest = (): SearchUsersActions => ({
+export const handleSeacrhInput = (value: string): UsersActions => ({
+  type: HANDLE_SEARCH_INPUT,
+  payload: value
+})
+
+export const fetchUsersRequest = (): UsersActions => ({
   type: FETCH_USERS_REQUEST
 });
 
 export const fetchUsersSuccess = (
   data: Array<UserInfo>
-): SearchUsersActions => ({
+): UsersActions => ({
   type: FETCH_USERS_SUCCESS,
   payload: data
 });
 
-export const fetchUsersFailure = (): SearchUsersActions => ({
+export const fetchUsersFailure = (): UsersActions => ({
   type: FETCH_USERS_FAILURE
 });
 
 export const fetchUsers = (): ThunkAction<
   void,
-  SearchUserState,
+  UsersState,
   null,
-  SearchUsersActions
+  UsersActions
 > => async dispatch => {
   dispatch(fetchUsersRequest());
   try {
@@ -41,3 +47,4 @@ export const fetchUsers = (): ThunkAction<
 };
 
 export type FetchUsers = typeof fetchUsers;
+export type HandleSeacrhInput = typeof handleSeacrhInput;

@@ -23,6 +23,7 @@
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "typeface-roboto": "0.0.54",
     "typescript": "3.3.3333"
   },

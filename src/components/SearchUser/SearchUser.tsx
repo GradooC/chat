@@ -19,9 +19,15 @@ import PersonIcon from "@material-ui/icons/Person";
 
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../../store/store";
-import { fetchUsers, FetchUsers } from "../../store/searchUser/actions";
+import {
+  fetchUsers,
+  FetchUsers,
+  handleSeacrhInput,
+  HandleSeacrhInput
+} from "../../store/searchUser/actions";
 import { UserInfo } from "../../store/searchUser/types";
-import { capitalize } from 'lodash';
+import { capitalize } from "lodash";
+import { createSelector } from "reselect";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -77,32 +83,26 @@ const styles = (theme: Theme) =>
     }
   });
 
-export interface SearchUserState {
-  searchValue: string;
-}
+export interface SearchUserState {}
 
 export interface SearchUserProps extends WithStyles<typeof styles> {
   fetchUsers: FetchUsers;
-  users: Array<UserInfo>;
+  handleSearchInput: HandleSeacrhInput;
+  filteredUsers: Array<UserInfo>;
 }
 
 class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
-  public state = {
-    searchValue: ""
-  };
-
   public componentDidMount() {
     this.props.fetchUsers();
   }
 
   private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchValue: e.target.value });
+    this.props.handleSearchInput(e.target.value);
   };
 
   public render() {
-    const { classes, users } = this.props;
-    const { searchValue } = this.state;
-
+    const { classes, filteredUsers } = this.props;
+    console.log('render');
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -113,7 +113,7 @@ class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder="Search user…"
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput
@@ -125,15 +125,15 @@ class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
           </Toolbar>
         </AppBar>
         <List className={classes.list}>
-          {users
-            .filter(user => `${user.first_name} ${user.last_name}`.startsWith(searchValue))
-            .map(user => (
+          {filteredUsers.map(user => (
             <ListItem divider={true} key={user.id}>
               <Avatar>
                 <PersonIcon />
               </Avatar>
               <ListItemText
-                primary={`${capitalize(user.first_name)} ${capitalize(user.last_name)}`}
+                primary={`${capitalize(user.first_name)} ${capitalize(
+                  user.last_name
+                )}`}
                 secondary={user.email}
               />
             </ListItem>
@@ -144,12 +144,22 @@ class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
   }
 }
 
+const getFilteredUsers = createSelector<AppState, Array<UserInfo>, string, Array<UserInfo>>(
+  state => state.users.users,
+  state => state.users.searchValue,
+  (users, searchValue) =>
+    users.filter(user =>
+      `${user.first_name} ${user.last_name}`.startsWith(searchValue)
+    )
+);
+
 const mapStateToProps = (state: AppState) => ({
-  users: state.searchUser.users
+  filteredUsers: getFilteredUsers(state)
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
-  fetchUsers: () => dispatch(fetchUsers())
+  fetchUsers: () => dispatch(fetchUsers()),
+  handleSearchInput: (value: string) => dispatch(handleSeacrhInput(value))
 });
 
 export default connect(

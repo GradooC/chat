@@ -6,7 +6,8 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
-  SIGN_UP_SUCCESS
+  SIGN_UP_SUCCESS,
+  LOGOUT
 } from "./types";
 
 const initialState: AuthState = {
@@ -32,6 +33,8 @@ const authReducer = (
       return { ...state, reqSignUpStatus: "successed" };
     case SIGN_UP_FAILURE:
       return { ...state, reqSignUpStatus: "faild" };
+    case LOGOUT: // Нужно ли чистить весть стэйт при логауте?
+      return { ...state, isAuthenticated: false };
     default:
       return state;
   }

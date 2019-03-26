@@ -102,7 +102,7 @@ class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
 
   public render() {
     const { classes, filteredUsers } = this.props;
-    console.log('render');
+
     return (
       <div className={classes.root}>
         <AppBar position="static">

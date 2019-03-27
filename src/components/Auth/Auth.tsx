@@ -39,24 +39,24 @@ const Auth: React.FunctionComponent<AuthProps> = props => {
   };
 
   return (
-    <Paper className={classes.root} elevation={20}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={props.history.location.pathname}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-        >
-          <Tab label="sign in" value={`${match.url}/sign-in`} />
-          <Tab label="sign up" value={`${match.url}/sign-up`} />
-        </Tabs>
-      </AppBar>
-      <Switch>
-        <Route path={`${match.url}/sign-in`} component={SignIn} />
-        <Route path={`${match.url}/sign-up`} component={SignUp} />
-      </Switch>
-    </Paper>
+      <Paper className={classes.root} elevation={20}>
+        <AppBar position="static" color="default">
+          <Tabs
+            value={props.history.location.pathname}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+          >
+            <Tab label="sign in" value={`/auth/sign-in`} />
+            <Tab label="sign up" value={`/auth/sign-up`} />
+          </Tabs>
+        </AppBar>
+        <Switch>
+          <Route path={`/auth/sign-in`} component={SignIn} />
+          <Route path={`/auth/sign-up`} component={SignUp} />
+        </Switch>
+      </Paper>
   );
 };
 

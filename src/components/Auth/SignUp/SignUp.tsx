@@ -8,10 +8,12 @@ import styles from "../styles";
 
 import { Input } from "../types";
 import checkValidity from "../../../shared/validate";
-import * as actions from '../../../store/auth/actions';
+import { signUp, SignUpType } from "../../../store/auth/actions";
 import { AppState } from "../../../store/store";
 import { ThunkDispatch } from "redux-thunk";
-import { UserData, RequestStatus } from "../../../store/auth/types";
+import { AuthActionTypes } from "../../../store/auth/types";
+import { RequestStatus } from "../../../store/store";
+import { bindActionCreators } from "redux";
 
 interface SignUpState {
   name: Input;
@@ -21,12 +23,11 @@ interface SignUpState {
 }
 
 export interface SignUpProps extends WithStyles<typeof styles> {
-  signUp: actions.SignUp;
+  signUp: SignUpType;
   requestStatus: RequestStatus;
 }
 
 class SignUp extends React.Component<SignUpProps, SignUpState> {
-
   public state: SignUpState = {
     name: {
       value: "",
@@ -59,9 +60,8 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
   };
 
   private isSubmitDisable = (): boolean => {
-    return ['name', 'password', 'confirmPassword'].some(
-      field =>
-        this.state[field].error !== null || !this.state[field].isTouched
+    return ["name", "password", "confirmPassword"].some(
+      field => this.state[field].error !== null || !this.state[field].isTouched
     );
   };
 
@@ -91,9 +91,9 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
     const userData = {
       name: name.value,
       password: password.value
-    }
+    };
     this.props.signUp(userData);
-  }
+  };
 
   public render() {
     const { name, password, confirmPassword } = this.state;
@@ -102,7 +102,7 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
     } = this.props;
 
     return (
-      <form className={container} noValidate autoComplete="off" >
+      <form className={container} noValidate autoComplete="off">
         <TextField
           label="Name"
           value={name.value}
@@ -157,12 +157,11 @@ class SignUp extends React.Component<SignUpProps, SignUpState> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  requestStatus: state.auth.reqSignUpStatus,
+  requestStatus: state.auth.reqSignUpStatus
 });
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
-  signUp: (userData: UserData) => dispatch(actions.signUp(userData)),
-});
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, null, AuthActionTypes>) =>
+  bindActionCreators({ signUp }, dispatch);
 
 export default connect(
   mapStateToProps,

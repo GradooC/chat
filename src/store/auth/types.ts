@@ -1,3 +1,5 @@
+import { RequestStatus } from "../store";
+
 export const SIGN_IN_REQUEST = "SIGN_IN_REQUEST";
 export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";
 export const SIGN_IN_FAILURE = "SIGN_IN_FAILURE";
@@ -6,7 +8,7 @@ export const SIGN_UP_REQUEST = "SIGN_UP_REQUEST";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
 
-export type RequestStatus = 'requested' | 'successed' | 'faild' | 'none';
+export const LOGOUT = "LOGOUT";
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -19,9 +21,12 @@ export interface UserData {
   password: string;
 }
 
+interface LogoutAction {
+  type: typeof LOGOUT;
+}
+
 interface SignInRequestAction {
   type: typeof SIGN_IN_REQUEST;
-  payload: UserData;
 }
 
 interface SignInSuccessAction {
@@ -34,7 +39,6 @@ interface SignInFailureAction {
 
 interface SignUpRequestAction {
   type: typeof SIGN_UP_REQUEST;
-  payload: UserData;
 }
 
 interface SignUpSuccessAction {
@@ -51,4 +55,5 @@ export type AuthActionTypes =
   | SignInFailureAction
   | SignUpRequestAction
   | SignUpSuccessAction
-  | SignUpFailureAction;
+  | SignUpFailureAction
+  | LogoutAction

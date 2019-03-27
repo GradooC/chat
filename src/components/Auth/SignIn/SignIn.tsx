@@ -8,12 +8,13 @@ import { connect } from "react-redux";
 import checkValidity from "../../../shared/validate";
 import styles from "../styles";
 import { Input } from "../types";
-import * as actions from "../../../store/auth/actions";
+import { signIn, SignInType } from "../../../store/auth/actions";
 import { AppState } from "../../../store/store";
 import { ThunkDispatch } from "redux-thunk";
-import { UserData } from "../../../store/auth/types";
+import { AuthActionTypes } from "../../../store/auth/types";
 import { RequestStatus } from "../../../store/store";
 import { Redirect } from "react-router";
+import { bindActionCreators } from "redux";
 
 export interface SignInState {
   name: Input;
@@ -22,7 +23,7 @@ export interface SignInState {
 }
 
 export interface SignInProps extends WithStyles<typeof styles> {
-  signIn: actions.SignIn;
+  signIn: SignInType;
   requestStatus: RequestStatus;
   isSignIn: boolean;
 }
@@ -84,12 +85,13 @@ class SignIn extends React.Component<SignInProps, SignInState> {
   public render() {
     const { name, password } = this.state;
     const {
-      classes: { container, button }, isSignIn
+      classes: { container, button },
+      isSignIn
     } = this.props;
 
     return (
       <>
-        {isSignIn ? <Redirect to='/logout' /> : null}
+        {isSignIn ? <Redirect to="/logout" /> : null}
         <form className={container} noValidate autoComplete="off">
           <TextField
             label="Name"
@@ -136,9 +138,8 @@ const mapStateToProps = (state: AppState) => ({
   isSignIn: state.auth.isAuthenticated
 });
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
-  signIn: (userData: UserData) => dispatch(actions.signIn(userData))
-});
+const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, null, AuthActionTypes>) =>
+  bindActionCreators({ signIn }, dispatch);
 
 export default connect(
   mapStateToProps,

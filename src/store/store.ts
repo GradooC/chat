@@ -4,14 +4,14 @@ import searchUserReducer from "./searchUser/reducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const rootReducet = combineReducers({
+const rootReducer = combineReducers({
   auth: authReducer,
   users: searchUserReducer
 });
 
-const store = createStore(rootReducet, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;
 
-export type AppState = ReturnType<typeof rootReducet>;
-export type RequestStatus = 'requested' | 'successed' | 'faild' | 'none';
+export type AppState = ReturnType<typeof rootReducer>;
+export type RequestStatus = 'request' | 'success' | 'fail' | 'none';

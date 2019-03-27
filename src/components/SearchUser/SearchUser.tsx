@@ -21,13 +21,14 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../../store/store";
 import {
   fetchUsers,
-  FetchUsers,
-  handleSeacrhInput,
-  HandleSeacrhInput
+  FetchUsersType,
+  handleSearchInput,
+  HandleSearchInputType
 } from "../../store/searchUser/actions";
-import { UserInfo } from "../../store/searchUser/types";
+import { UserInfo, UsersActions } from "../../store/searchUser/types";
 import { capitalize } from "lodash";
 import { createSelector } from "reselect";
+import { bindActionCreators } from "redux";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -86,8 +87,8 @@ const styles = (theme: Theme) =>
 export interface SearchUserState {}
 
 export interface SearchUserProps extends WithStyles<typeof styles> {
-  fetchUsers: FetchUsers;
-  handleSearchInput: HandleSeacrhInput;
+  fetchUsers: FetchUsersType;
+  handleSearchInput: HandleSearchInputType;
   filteredUsers: Array<UserInfo>;
 }
 
@@ -144,7 +145,12 @@ class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
   }
 }
 
-const getFilteredUsers = createSelector<AppState, Array<UserInfo>, string, Array<UserInfo>>(
+const getFilteredUsers = createSelector<
+  AppState,
+  Array<UserInfo>,
+  string,
+  Array<UserInfo>
+>(
   state => state.users.users,
   state => state.users.searchValue,
   (users, searchValue) =>
@@ -157,10 +163,9 @@ const mapStateToProps = (state: AppState) => ({
   filteredUsers: getFilteredUsers(state)
 });
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => ({
-  fetchUsers: () => dispatch(fetchUsers()),
-  handleSearchInput: (value: string) => dispatch(handleSeacrhInput(value))
-});
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<AppState, null, UsersActions>
+) => bindActionCreators({ fetchUsers, handleSearchInput }, dispatch);
 
 export default connect(
   mapStateToProps,

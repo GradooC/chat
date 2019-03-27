@@ -20,11 +20,11 @@ const authReducer = (
 ): UsersState => {
   switch (action.type) {
     case FETCH_USERS_REQUEST:
-      return { ...state, requestStatus: 'requested' };
+      return { ...state, requestStatus: 'request' };
     case FETCH_USERS_SUCCESS:
-      return { ...state, requestStatus: 'successed', users: action.payload };
+      return { ...state, requestStatus: 'success', users: action.payload };
     case FETCH_USERS_FAILURE:
-      return { ...state, requestStatus: 'faild' };
+      return { ...state, requestStatus: 'fail' };
     case HANDLE_SEARCH_INPUT: 
       return { ...state, searchValue: action.payload };
     default:

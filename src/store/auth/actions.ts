@@ -54,7 +54,7 @@ export const authCheckStatus = (): ThunkAction<
   }
 };
 
-export type AuthCheckStatus = typeof authCheckStatus;
+export type AuthCheckStatusType = typeof authCheckStatus;
 
 export const onLogout = (): ThunkAction<
   void,
@@ -66,7 +66,7 @@ export const onLogout = (): ThunkAction<
   dispatch(logout());
 };
 
-export type OnLogout = typeof onLogout;
+export type OnLogoutType = typeof onLogout;
 
 export const signIn = (
   userData: UserData
@@ -85,7 +85,7 @@ export const signIn = (
   }
 };
 
-export type SignIn = typeof signIn;
+export type SignInType = typeof signIn;
 
 export const signUp = (
   userData: UserData
@@ -103,4 +103,4 @@ export const signUp = (
   }
 };
 
-export type SignUp = typeof signUp;
+export type SignUpType = typeof signUp;

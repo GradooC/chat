@@ -8,7 +8,7 @@ import Auth from "./components/Auth/Auth";
 import Layout from "./components/Layout/Layout";
 import { connect } from "react-redux";
 import { AppState } from "./store/store";
-import { authCheckStatus, AuthCheckStatus } from "./store/auth/actions";
+import { authCheckStatus, AuthCheckStatusType } from "./store/auth/actions";
 import { ThunkDispatch } from "redux-thunk";
 import Logout from "./components/Auth/Logout/Logout";
 
@@ -16,7 +16,7 @@ export interface AppState {}
 
 export interface AppProps {
   isSignIn: boolean;
-  onTryAutoSignup: AuthCheckStatus;
+  onTryAutoSignup: AuthCheckStatusType;
 }
 
 class App extends React.Component<AppProps, AppState> {

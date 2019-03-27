@@ -22,17 +22,17 @@ const authReducer = (
 ): AuthState => {
   switch (action.type) {
     case SIGN_IN_REQUEST:
-      return { ...state, reqSignInStatus: "requested" };
+      return { ...state, reqSignInStatus: "request" };
     case SIGN_IN_SUCCESS:
-      return { ...state, reqSignInStatus: "successed", isAuthenticated: true };
+      return { ...state, reqSignInStatus: "success", isAuthenticated: true };
     case SIGN_IN_FAILURE:
-      return { ...state, reqSignInStatus: "faild" };
+      return { ...state, reqSignInStatus: "fail" };
     case SIGN_UP_REQUEST:
-      return { ...state, reqSignUpStatus: "requested" };
+      return { ...state, reqSignUpStatus: "request" };
     case SIGN_UP_SUCCESS:
-      return { ...state, reqSignUpStatus: "successed" };
+      return { ...state, reqSignUpStatus: "success" };
     case SIGN_UP_FAILURE:
-      return { ...state, reqSignUpStatus: "faild" };
+      return { ...state, reqSignUpStatus: "fail" };
     case LOGOUT: // Нужно ли чистить весть стэйт при логауте?
       return { ...state, isAuthenticated: false };
     default:

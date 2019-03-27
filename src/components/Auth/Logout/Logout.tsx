@@ -6,12 +6,12 @@ import { connect } from "react-redux";
 import { AppState } from "../../../store/store";
 import { ThunkDispatch } from "redux-thunk";
 import { Typography } from "@material-ui/core";
-import { onLogout, OnLogout } from "../../../store/auth/actions";
+import { onLogout, OnLogoutType } from "../../../store/auth/actions";
 
 export interface LogoutState {}
 
 export interface LogoutProps extends WithStyles<typeof styles> {
-  logout: OnLogout;
+  logout: OnLogoutType;
 }
 
 const styles = (theme: Theme) =>

@@ -11,7 +11,7 @@ import { ThunkAction } from "redux-thunk";
 import routes from "../../routes";
 import axios from "axios";
 
-export const handleSeacrhInput = (value: string): UsersActions => ({
+export const handleSearchInput = (value: string): UsersActions => ({
   type: HANDLE_SEARCH_INPUT,
   payload: value
 })
@@ -46,5 +46,5 @@ export const fetchUsers = (): ThunkAction<
   }
 };
 
-export type FetchUsers = typeof fetchUsers;
-export type HandleSeacrhInput = typeof handleSeacrhInput;
+export type FetchUsersType = typeof fetchUsers;
+export type HandleSearchInputType = typeof handleSearchInput;

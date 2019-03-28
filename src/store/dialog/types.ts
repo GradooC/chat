@@ -11,7 +11,9 @@ export interface MessageInfo {
 }
 
 export interface MessageWithAuthor extends MessageInfo {
-  userName: string;
+  firstName: string;
+  lastName: string;
+  avatar: string | null;
 }
 
 export interface MessagesState {

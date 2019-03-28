@@ -10,7 +10,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../../store/store";
 import { bindActionCreators } from "redux";
 import { fetchMessages, FetchMessagesType } from "../../store/dialog/actions";
-import { MessageInfo, MessagesActions } from "../../store/dialog/types";
+import { MessageInfo, MessagesActions, MessageWithAuthor } from "../../store/dialog/types";
 import MyPhrase from "./MyPhrase";
 import TheirPhrase from "./TheirPhrase";
 import { createSelector } from "reselect";
@@ -24,9 +24,6 @@ const styles = (theme: Theme) =>
     }
   });
 
-interface MessageWithAuthor extends MessageInfo {
-  userName: string;
-}
 
 export interface DialogState {}
 
@@ -68,10 +65,11 @@ const getMessageWithAuthor = createSelector<
   (messages, users) =>
     messages.map(message => {
       const messageAuthor = users.find(user => user.id === message.user_id);
-      const authorFullName = messageAuthor
-        ? `${messageAuthor.first_name} ${messageAuthor.last_name}`
-        : "";
-      return { ...message, userName: authorFullName };
+      const authorFirstName = messageAuthor ? messageAuthor.first_name : '';
+      const authorLastName = messageAuthor ? messageAuthor.last_name : '';
+
+      const authorAvatar = messageAuthor ? messageAuthor.avatar : null;
+      return { ...message, firstName: authorFirstName, lastName: authorLastName, avatar: authorAvatar };
     })
 );
 

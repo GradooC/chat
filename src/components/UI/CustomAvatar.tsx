@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import PersonIcon from "@material-ui/icons/Person";
 import {
   createStyles,
   Theme,
@@ -14,26 +13,31 @@ const styles = (theme: Theme) =>
       marginRight: 10,
       width: 60,
       height: 60,
-      backgroundColor: "#ddd"
+      backgroundColor: "#bdbdbd",
+      color: 'blue'
     }
   });
 
-interface TheirPhraseProps extends WithStyles<typeof styles> {}
+interface CustomAvatarProps extends WithStyles<typeof styles> {
+  avatar: string | null;
+  firstName: string;
+  lastName: string;
+}
 
-const TheirPhrase: FunctionComponent<TheirPhraseProps> = props => {
-  const { classes } = props;
+const CustomAvatar: FunctionComponent<CustomAvatarProps> = props => {
+  const { classes, avatar, firstName, lastName } = props;
 
-  return true ? (
+  return avatar ? (
     <Avatar
       classes={{ root: classes.avatar }}
-      alt="alt"
-      src={require("../../assets/autcorporiseaque.png")}
+      alt={lastName}
+      src={require(`../../assets/${avatar}`)}
     />
   ) : (
-    <Avatar classes={{ root: classes.avatar }} alt="alt" >
-      <PersonIcon />
+    <Avatar classes={{ root: classes.avatar }} alt={lastName} >
+      {`${firstName.substr(0, 1).toLocaleUpperCase()}${lastName.substr(0, 1).toLocaleUpperCase()}`}
     </Avatar>
   );
 };
 
-export default withStyles(styles)(TheirPhrase);
+export default withStyles(styles)(CustomAvatar);

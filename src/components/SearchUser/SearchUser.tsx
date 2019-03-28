@@ -12,10 +12,8 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import { connect } from "react-redux";
-import PersonIcon from "@material-ui/icons/Person";
 
 import { ThunkDispatch } from "redux-thunk";
 import { AppState } from "../../store/store";
@@ -29,11 +27,13 @@ import { UserInfo, UsersActions } from "../../store/searchUser/types";
 import { capitalize } from "lodash";
 import { createSelector } from "reselect";
 import { bindActionCreators } from "redux";
+import CustomAvatar from "../UI/CustomAvatar";
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: "100%"
+      maxWidth: 1000,
+      margin: '0 auto'
     },
     grow: {
       flexGrow: 1
@@ -98,7 +98,7 @@ class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
   }
 
   private handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.handleSearchInput(e.target.value);
+    this.props.handleSearchInput(e.target.value.toLowerCase());
   };
 
   public render() {
@@ -128,14 +128,12 @@ class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
         <List className={classes.list}>
           {filteredUsers.map(user => (
             <ListItem divider={true} key={user.id}>
-              <Avatar>
-                <PersonIcon />
-              </Avatar>
+              <CustomAvatar avatar={user.avatar} firstName={user.first_name} lastName={user.last_name} />
               <ListItemText
                 primary={`${capitalize(user.first_name)} ${capitalize(
                   user.last_name
                 )}`}
-                secondary={user.email}
+                secondary={user.gender}
               />
             </ListItem>
           ))}

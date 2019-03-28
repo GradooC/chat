@@ -1,6 +1,4 @@
 import React, { FunctionComponent } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import PersonIcon from "@material-ui/icons/Person";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import {
@@ -11,7 +9,6 @@ import {
 } from "@material-ui/core/styles";
 import { MessageWithAuthor } from "../../store/dialog/types";
 import CustomAvatar from "../UI/CustomAvatar";
-// import img from "../../assets/autcorporiseaque.png";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -32,7 +29,11 @@ const styles = (theme: Theme) =>
       height: 60,
       backgroundColor: '#ddd'
     },
-    userName: {
+    firstName: {
+      textTransform: 'capitalize',
+      marginRight: 3
+    },
+    lastName: {
       textTransform: 'capitalize',
       marginRight: 10
     },
@@ -49,20 +50,21 @@ interface TheirPhraseProps extends WithStyles<typeof styles> {
 const TheirPhrase: FunctionComponent<TheirPhraseProps> = props => {
   const {
     classes,
-    item: { text, time, userName }
+
+    item: { text, time, firstName, lastName, avatar }
   } = props;
 
   return (
     <div className={classes.root}>
-      {/* <Avatar classes={{ root: classes.avatar }} alt={userName} src={img}>
-        <PersonIcon />
-      </Avatar> */}
-      <CustomAvatar />
+      <CustomAvatar firstName={firstName} lastName={lastName} avatar={avatar} />
       <div className={classes.item}>
         <div className={classes.meta}>
-          <Typography classes={{ root: classes.userName }}
+          <Typography classes={{ root: classes.firstName }}
             variant="caption"
-          >{userName}</Typography>
+          >{firstName}</Typography>
+          <Typography classes={{ root: classes.lastName }}
+            variant="caption"
+          >{lastName}</Typography>
           <Typography
             variant="caption"
           >{time}</Typography>

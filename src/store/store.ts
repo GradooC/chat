@@ -1,12 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import authReducer from "./auth/reducer";
 import searchUserReducer from "./searchUser/reducer";
+import dialogReducer from './dialog/reducer';
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  users: searchUserReducer
+  users: searchUserReducer,
+  messages: dialogReducer
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

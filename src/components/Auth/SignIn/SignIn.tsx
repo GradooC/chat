@@ -25,7 +25,7 @@ export interface SignInState {
 export interface SignInProps extends WithStyles<typeof styles> {
   signIn: SignInType;
   requestStatus: RequestStatus;
-  isSignIn: boolean;
+  isSignedIn: boolean;
 }
 
 class SignIn extends React.Component<SignInProps, SignInState> {
@@ -86,12 +86,12 @@ class SignIn extends React.Component<SignInProps, SignInState> {
     const { name, password } = this.state;
     const {
       classes: { container, button },
-      isSignIn
+      isSignedIn
     } = this.props;
 
     return (
       <>
-        {isSignIn ? <Redirect to="/logout" /> : null}
+        {isSignedIn ? <Redirect to="/logout" /> : null}
         <form className={container} noValidate autoComplete="off">
           <TextField
             label="Name"
@@ -135,7 +135,7 @@ class SignIn extends React.Component<SignInProps, SignInState> {
 
 const mapStateToProps = (state: AppState) => ({
   requestStatus: state.auth.reqSignInStatus,
-  isSignIn: state.auth.isAuthenticated
+  isSignedIn: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, null, AuthActionTypes>) =>

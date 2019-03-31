@@ -1,266 +1,349 @@
 {
-  "sign_in": { "status": "ok" },
-  "sign_up": { "status": "ok" },
-  "users": [{
-    "id": 1,
-    "first_name": "genevieve",
-    "last_name": "cocher",
-    "gender": "Female",
-    "avatar": "eligendiquianecessitatibus.png"
-  }, {
-    "id": 2,
-    "first_name": "camila",
-    "last_name": "kadd",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 3,
-    "first_name": "cindee",
-    "last_name": "heball",
-    "gender": "Female",
-    "avatar": "autcorporiseaque.png"
-  }, {
-    "id": 4,
-    "first_name": "lily",
-    "last_name": "proske",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 5,
-    "first_name": "stan",
-    "last_name": "copelli",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 6,
-    "first_name": "christophorus",
-    "last_name": "cranmer",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 7,
-    "first_name": "talia",
-    "last_name": "konrad",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 8,
-    "first_name": "ann",
-    "last_name": "brumfield",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 9,
-    "first_name": "ingrim",
-    "last_name": "mcfee",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 10,
-    "first_name": "cornie",
-    "last_name": "outhwaite",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 11,
-    "first_name": "allie",
-    "last_name": "bosse",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 12,
-    "first_name": "elke",
-    "last_name": "blees",
-    "gender": "Female",
-    "avatar": "vitaeveromaxime.png"
-  }, {
-    "id": 13,
-    "first_name": "becky",
-    "last_name": "cod",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 14,
-    "first_name": "cirstoforo",
-    "last_name": "rann",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 15,
-    "first_name": "timmi",
-    "last_name": "gauntley",
-    "gender": "Female",
-    "avatar": "velatquequia.png"
-  }, {
-    "id": 16,
-    "first_name": "henriette",
-    "last_name": "palfree",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 17,
-    "first_name": "stanly",
-    "last_name": "elkington",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 18,
-    "first_name": "clerissa",
-    "last_name": "marti",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 19,
-    "first_name": "octavius",
-    "last_name": "flook",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 20,
-    "first_name": "christoph",
-    "last_name": "crutchley",
-    "gender": "Male",
-    "avatar": "nesciuntipsumcumque.png"
-  }, {
-    "id": 21,
-    "first_name": "nani",
-    "last_name": "mytton",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 22,
-    "first_name": "dani",
-    "last_name": "swatheridge",
-    "gender": "Male",
-    "avatar": "officiisquoddolore.png"
-  }, {
-    "id": 23,
-    "first_name": "clay",
-    "last_name": "genicke",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 24,
-    "first_name": "fraser",
-    "last_name": "wintour",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 25,
-    "first_name": "kati",
-    "last_name": "marzella",
-    "gender": "Female",
-    "avatar": "quoliberosit.png"
-  }, {
-    "id": 26,
-    "first_name": "rik",
-    "last_name": "rossbrook",
-    "gender": "Male",
-    "avatar": "sitplaceatet.png"
-  }, {
-    "id": 27,
-    "first_name": "dennet",
-    "last_name": "poulett",
-    "gender": "Male",
-    "avatar": null
-  }, {
-    "id": 28,
-    "first_name": "janos",
-    "last_name": "chaffer",
-    "gender": "Male",
-    "avatar": "consequaturetet.png"
-  }, {
-    "id": 29,
-    "first_name": "adeline",
-    "last_name": "willimont",
-    "gender": "Female",
-    "avatar": null
-  }, {
-    "id": 30,
-    "first_name": "natalie",
-    "last_name": "maggiori",
-    "gender": "Female",
-    "avatar": null
-  }],
-  "messages": [{
-    "user_id": 1,
-    "text": "dui",
-    "time": "5:23"
-  }, {
-    "user_id": 4,
-    "text": "magna at nunc commodo placerat praesent blandit nam nulla integer pede",
-    "time": "21:04"
-  }, {
-    "user_id": 3,
-    "text": "rutrum nulla tellus",
-    "time": "6:12"
-  }, {
-    "user_id": 3,
-    "text": "suspendisse potenti cras in purus eu magna vulputate luctus cum",
-    "time": "9:34"
-  }, {
-    "user_id": 3,
-    "text": "et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus at turpis donec posuere",
-    "time": "15:26"
-  }, {
-    "user_id": 1,
-    "text": "cubilia curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis",
-    "time": "6:06"
-  }, {
-    "user_id": 3,
-    "text": "montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent",
-    "time": "16:51"
-  }, {
-    "user_id": 4,
-    "text": "mollis",
-    "time": "4:14"
-  }, {
-    "user_id": 4,
-    "text": "et magnis dis",
-    "time": "9:13"
-  }, {
-    "user_id": 4,
-    "text": "odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus",
-    "time": "17:21"
-  }, {
-    "user_id": 1,
-    "text": "vestibulum",
-    "time": "6:31"
-  }, {
-    "user_id": 2,
-    "text": "ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh in hac",
-    "time": "17:32"
-  }, {
-    "user_id": 2,
-    "text": "elementum pellentesque quisque porta volutpat erat quisque",
-    "time": "16:46"
-  }, {
-    "user_id": 2,
-    "text": "nec molestie sed",
-    "time": "22:51"
-  }, {
-    "user_id": 4,
-    "text": "ac diam cras",
-    "time": "5:02"
-  }, {
-    "user_id": 4,
-    "text": "nunc vestibulum ante ipsum primis in faucibus orci luctus et",
-    "time": "22:16"
-  }, {
-    "user_id": 4,
-    "text": "ac diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna",
-    "time": "18:32"
-  }, {
-    "user_id": 4,
-    "text": "donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis",
-    "time": "2:20"
-  }, {
-    "user_id": 2,
-    "text": "lobortis sapien sapien non mi",
-    "time": "3:27"
-  }, {
-    "user_id": 3,
-    "text": "pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam",
-    "time": "22:19"
-  }]
+  "sign_in": {
+    "status": "ok",
+    "user_id": 1
+  },
+  "sign_up": {
+    "status": "ok"
+  },
+  "users": [
+    {
+      "id": 1,
+      "first_name": "genevieve",
+      "last_name": "cocher",
+      "gender": "Female",
+      "avatar": "eligendiquianecessitatibus.png"
+    },
+    {
+      "id": 2,
+      "first_name": "camila",
+      "last_name": "kadd",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 3,
+      "first_name": "cindee",
+      "last_name": "heball",
+      "gender": "Female",
+      "avatar": "autcorporiseaque.png"
+    },
+    {
+      "id": 4,
+      "first_name": "lily",
+      "last_name": "proske",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 5,
+      "first_name": "stan",
+      "last_name": "copelli",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 6,
+      "first_name": "christophorus",
+      "last_name": "cranmer",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 7,
+      "first_name": "talia",
+      "last_name": "konrad",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 8,
+      "first_name": "ann",
+      "last_name": "brumfield",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 9,
+      "first_name": "ingrim",
+      "last_name": "mcfee",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 10,
+      "first_name": "cornie",
+      "last_name": "outhwaite",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 11,
+      "first_name": "allie",
+      "last_name": "bosse",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 12,
+      "first_name": "elke",
+      "last_name": "blees",
+      "gender": "Female",
+      "avatar": "vitaeveromaxime.png"
+    },
+    {
+      "id": 13,
+      "first_name": "becky",
+      "last_name": "cod",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 14,
+      "first_name": "cirstoforo",
+      "last_name": "rann",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 15,
+      "first_name": "timmi",
+      "last_name": "gauntley",
+      "gender": "Female",
+      "avatar": "velatquequia.png"
+    },
+    {
+      "id": 16,
+      "first_name": "henriette",
+      "last_name": "palfree",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 17,
+      "first_name": "stanly",
+      "last_name": "elkington",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 18,
+      "first_name": "clerissa",
+      "last_name": "marti",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 19,
+      "first_name": "octavius",
+      "last_name": "flook",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 20,
+      "first_name": "christoph",
+      "last_name": "crutchley",
+      "gender": "Male",
+      "avatar": "nesciuntipsumcumque.png"
+    },
+    {
+      "id": 21,
+      "first_name": "nani",
+      "last_name": "mytton",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 22,
+      "first_name": "dani",
+      "last_name": "swatheridge",
+      "gender": "Male",
+      "avatar": "officiisquoddolore.png"
+    },
+    {
+      "id": 23,
+      "first_name": "clay",
+      "last_name": "genicke",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 24,
+      "first_name": "fraser",
+      "last_name": "wintour",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 25,
+      "first_name": "kati",
+      "last_name": "marzella",
+      "gender": "Female",
+      "avatar": "quoliberosit.png"
+    },
+    {
+      "id": 26,
+      "first_name": "rik",
+      "last_name": "rossbrook",
+      "gender": "Male",
+      "avatar": "sitplaceatet.png"
+    },
+    {
+      "id": 27,
+      "first_name": "dennet",
+      "last_name": "poulett",
+      "gender": "Male",
+      "avatar": null
+    },
+    {
+      "id": 28,
+      "first_name": "janos",
+      "last_name": "chaffer",
+      "gender": "Male",
+      "avatar": "consequaturetet.png"
+    },
+    {
+      "id": 29,
+      "first_name": "adeline",
+      "last_name": "willimont",
+      "gender": "Female",
+      "avatar": null
+    },
+    {
+      "id": 30,
+      "first_name": "natalie",
+      "last_name": "maggiori",
+      "gender": "Female",
+      "avatar": null
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "text": "sit amet diam in magna bibendum imperdiet nullam orci pede",
+      "time": "8:29"
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "text": "posuere nonummy integer non velit donec diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in",
+      "time": "22:54"
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "text": "placerat praesent blandit nam nulla",
+      "time": "19:53"
+    },
+    {
+      "id": 4,
+      "user_id": 2,
+      "text": "sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque",
+      "time": "16:32"
+    },
+    {
+      "id": 5,
+      "user_id": 1,
+      "text": "curae nulla dapibus dolor vel est donec odio",
+      "time": "20:35"
+    },
+    {
+      "id": 6,
+      "user_id": 1,
+      "text": "ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non",
+      "time": "19:18"
+    },
+    {
+      "id": 7,
+      "user_id": 3,
+      "text": "tempus vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis",
+      "time": "1:01"
+    },
+    {
+      "id": 8,
+      "user_id": 3,
+      "text": "quis orci eget orci vehicula condimentum curabitur",
+      "time": "9:21"
+    },
+    {
+      "id": 9,
+      "user_id": 4,
+      "text": "sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam nam tristique",
+      "time": "2:57"
+    },
+    {
+      "id": 10,
+      "user_id": 1,
+      "text": "quis augue luctus",
+      "time": "0:16"
+    },
+    {
+      "id": 11,
+      "user_id": 4,
+      "text": "luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus",
+      "time": "8:45"
+    },
+    {
+      "id": 12,
+      "user_id": 3,
+      "text": "faucibus accumsan odio curabitur convallis duis consequat dui nec nisi",
+      "time": "4:30"
+    },
+    {
+      "id": 13,
+      "user_id": 3,
+      "text": "integer",
+      "time": "13:33"
+    },
+    {
+      "id": 14,
+      "user_id": 3,
+      "text": "duis at velit eu",
+      "time": "1:38"
+    },
+    {
+      "id": 15,
+      "user_id": 1,
+      "text": "massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi",
+      "time": "3:38"
+    },
+    {
+      "id": 16,
+      "user_id": 4,
+      "text": "est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed",
+      "time": "2:02"
+    },
+    {
+      "id": 17,
+      "user_id": 2,
+      "text": "consectetuer adipiscing elit proin risus praesent lectus vestibulum quam sapien varius ut",
+      "time": "18:44"
+    },
+    {
+      "id": 18,
+      "user_id": 3,
+      "text": "est",
+      "time": "3:34"
+    },
+    {
+      "id": 19,
+      "user_id": 4,
+      "text": "pellentesque quisque porta",
+      "time": "11:29"
+    },
+    {
+      "id": 20,
+      "user_id": 4,
+      "text": "fusce posuere felis sed lacus morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem",
+      "time": "15:11"
+    },
+    {
+      "text": "test",
+      "time": "20:48",
+      "user_id": 1,
+      "id": 21
+    }
+  ]
 }

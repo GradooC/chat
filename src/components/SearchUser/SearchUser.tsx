@@ -106,7 +106,7 @@ class SearchUser extends React.Component<SearchUserProps, SearchUserState> {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Toolbar>
             <div className={classes.grow} />
             <div className={classes.search}>

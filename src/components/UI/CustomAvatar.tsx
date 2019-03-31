@@ -10,11 +10,11 @@ import {
 const styles = (theme: Theme) =>
   createStyles({
     avatar: {
-      marginRight: 10,
-      width: 60,
-      height: 60,
+      marginRight: '10px',
+      width: '60px',
+      height: '60px',
       backgroundColor: "#bdbdbd",
-      color: 'blue'
+      color: theme.palette.primary.light
     }
   });
 
@@ -35,7 +35,7 @@ const CustomAvatar: FunctionComponent<CustomAvatarProps> = props => {
     />
   ) : (
     <Avatar classes={{ root: classes.avatar }} alt={lastName} >
-      {`${firstName.substr(0, 1).toLocaleUpperCase()}${lastName.substr(0, 1).toLocaleUpperCase()}`}
+      {`${firstName.substr(0, 1).toUpperCase()}${lastName.substr(0, 1).toUpperCase()}`}
     </Avatar>
   );
 };

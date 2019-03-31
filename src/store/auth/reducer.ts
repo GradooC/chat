@@ -13,7 +13,8 @@ import {
 const initialState: AuthState = {
   isAuthenticated: false,
   reqSignInStatus: "none",
-  reqSignUpStatus: "none"
+  reqSignUpStatus: "none",
+  myUserId: 0
 };
 
 const authReducer = (
@@ -24,7 +25,7 @@ const authReducer = (
     case SIGN_IN_REQUEST:
       return { ...state, reqSignInStatus: "request" };
     case SIGN_IN_SUCCESS:
-      return { ...state, reqSignInStatus: "success", isAuthenticated: true };
+      return { ...state, reqSignInStatus: "success", isAuthenticated: true, myUserId: action.payload };
     case SIGN_IN_FAILURE:
       return { ...state, reqSignInStatus: "fail" };
     case SIGN_UP_REQUEST:

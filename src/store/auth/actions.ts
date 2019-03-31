@@ -19,8 +19,9 @@ const signInRequest = (): AuthActionTypes => ({
   type: SIGN_IN_REQUEST
 });
 
-const signInSuccess = (): AuthActionTypes => ({
-  type: SIGN_IN_SUCCESS
+const signInSuccess = (myUserId: number): AuthActionTypes => ({
+  type: SIGN_IN_SUCCESS,
+  payload: myUserId
 });
 
 const signInFailure = (): AuthActionTypes => ({
@@ -49,8 +50,9 @@ export const authCheckStatus = (): ThunkAction<
   null,
   AuthActionTypes
 > => dispatch => {
-  if (localStorage.getItem("isSignIn")) {
-    dispatch(signInSuccess());
+  if (localStorage.getItem("myUserId")) {
+    const myUserId = Number(localStorage.getItem("myUserId"));
+    dispatch(signInSuccess(myUserId));
   }
 };
 
@@ -62,7 +64,7 @@ export const onLogout = (): ThunkAction<
   null,
   AuthActionTypes
 > => dispatch => {
-  localStorage.removeItem("isSignIn");
+  localStorage.removeItem("myUserId");
   dispatch(logout());
 };
 
@@ -75,8 +77,9 @@ export const signIn = (
   try {
     const res = await axios.get(routes.signInRoute());
     if (res.status === 200) {
-      localStorage.setItem("isSignIn", "true");
-      dispatch(signInSuccess());
+      console.log(res);
+      localStorage.setItem("myUserId", res.data.user_id);
+      dispatch(signInSuccess(res.data.user_id));
     } else {
       dispatch(signInFailure());
     }

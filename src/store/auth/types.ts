@@ -14,6 +14,7 @@ export interface AuthState {
   isAuthenticated: boolean;
   reqSignInStatus: RequestStatus;
   reqSignUpStatus: RequestStatus;
+  myUserId: number;
 }
 
 export interface UserData {
@@ -31,6 +32,7 @@ interface SignInRequestAction {
 
 interface SignInSuccessAction {
   type: typeof SIGN_IN_SUCCESS;
+  payload: number;
 }
 
 interface SignInFailureAction {

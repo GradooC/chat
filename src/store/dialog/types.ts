@@ -9,14 +9,15 @@ export const SEND_MESSAGE_TO_STATE = 'SEND_MESSAGE_TO_STATE';
 import { RequestStatus } from "../store";
 
 export interface MessageInfo {
+  id: string;
   user_id: number;
   text: string;
-  time: string;
+  date: string;
 }
 
 export interface MessageWithAuthor extends MessageInfo {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   avatar: string | null;
 }
 

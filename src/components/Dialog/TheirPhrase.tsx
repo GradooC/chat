@@ -9,11 +9,13 @@ import {
 } from "@material-ui/core/styles";
 import { MessageWithAuthor } from "../../store/dialog/types";
 import CustomAvatar from "../UI/CustomAvatar";
+import getFormatedDate from '../../shared/dateFormatter';
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      margin: "20px 0",
+      marginTop: theme.spacing.unit * 3,
+      marginBottom: theme.spacing.unit * 3,
       display: "flex",
       justifyContent: "flex-start",
     },
@@ -24,21 +26,24 @@ const styles = (theme: Theme) =>
       display: 'flex'
     },
     avatar: {
-      marginRight: 10,
-      width: 60,
-      height: 60,
+      marginRight: theme.spacing.unit,
+      width: theme.spacing.unit * 8,
+      height: theme.spacing.unit * 8,
       backgroundColor: '#ddd'
     },
     firstName: {
       textTransform: 'capitalize',
-      marginRight: 3
+      marginRight: theme.spacing.unit / 2,
     },
     lastName: {
       textTransform: 'capitalize',
-      marginRight: 10
+      marginRight: theme.spacing.unit
     },
     paper: {
-      padding: "10px 25px",
+      paddingTop: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit,
+      paddingLeft: theme.spacing.unit * 3,
+      paddingRight: theme.spacing.unit * 3,
       borderRadius: `0 100px 100px 100px`
     }
   });
@@ -51,23 +56,23 @@ const TheirPhrase: FunctionComponent<TheirPhraseProps> = props => {
   const {
     classes,
 
-    item: { text, time, firstName, lastName, avatar }
+    item: { text, date, first_name, last_name, avatar }
   } = props;
 
   return (
     <div className={classes.root}>
-      <CustomAvatar firstName={firstName} lastName={lastName} avatar={avatar} />
+      <CustomAvatar firstName={first_name} lastName={last_name} avatar={avatar} />
       <div className={classes.item}>
         <div className={classes.meta}>
           <Typography classes={{ root: classes.firstName }}
             variant="caption"
-          >{firstName}</Typography>
+          >{first_name}</Typography>
           <Typography classes={{ root: classes.lastName }}
             variant="caption"
-          >{lastName}</Typography>
+          >{last_name}</Typography>
           <Typography
             variant="caption"
-          >{time}</Typography>
+          >{getFormatedDate(date)}</Typography>
         </div>
         <Paper elevation={5} classes={{ root: classes.paper }}>
           <Typography variant="body1">{text}</Typography>

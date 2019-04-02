@@ -49,7 +49,6 @@ class App extends React.Component<AppProps, AppState> {
       <BrowserRouter>
         <Layout>
           {routes}
-          {/* <Dialog /> */}
         </Layout>
       </BrowserRouter>
     );

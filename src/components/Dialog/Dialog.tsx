@@ -27,16 +27,17 @@ import { UserInfo } from "../../store/searchUser/types";
 import InputBase from "@material-ui/core/InputBase";
 import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
 import IconButton from "@material-ui/core/IconButton";
+import uuid from "uuid/v4";
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       maxWidth: theme.spacing.unit * 110,
       marginLeft: "auto",
-      marginRight: "auto",
+      marginRight: "auto"
     },
     messages: {
-      minHeight: '90vh'
+      minHeight: "90vh"
     },
     messageInput: {
       display: "flex",
@@ -44,8 +45,8 @@ const styles = (theme: Theme) =>
       backgroundColor: theme.palette.primary.dark,
       position: "sticky",
       bottom: 0,
-      width: '100%',
-      borderRadius: theme.shape.borderRadius,
+      width: "100%",
+      borderRadius: theme.shape.borderRadius
     },
     inputRoot: {
       width: "100%"
@@ -80,27 +81,34 @@ export interface DialogProps extends WithStyles<typeof styles> {
 }
 
 class Dialog extends React.Component<DialogProps, DialogState> {
-
-  messagesEndRef: any;  // TEST
+  private messagesEndRef = React.createRef<HTMLDivElement>();
 
   public state = {
     text: ""
   };
 
   public componentDidUpdate() {
-    this.messagesEndRef.scrollIntoView({ behavior: "smooth" });
+    const node = this.messagesEndRef.current;
+    if (node) {
+      node.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   public componentDidMount() {
     this.props.fetchMessages();
-    this.messagesEndRef.scrollIntoView({ behavior: "smooth" });
+
+    const node = this.messagesEndRef.current;
+    if (node) {
+      node.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   private handleInputButton = () => {
     const { text } = this.state;
-    const time = new Date().toTimeString().replace(/(\d{2}:\d{2}).*/, '$1');
-    this.props.sendMessage({ text, time, user_id: this.props.myUserId });
-    
+    const date = new Date().toISOString();
+    const id = uuid();
+    this.props.sendMessage({ id, user_id: this.props.myUserId, text, date });
+
     this.setState({ text: "" });
   };
 
@@ -117,36 +125,46 @@ class Dialog extends React.Component<DialogProps, DialogState> {
         <div className={classes.messages}>
           {messages.map(message =>
             message.user_id === myUserId ? (
-              <MyPhrase item={message} key={message.time} /> // key - TEST
+              <MyPhrase item={message} key={message.id} />
             ) : (
-              <TheirPhrase item={message} key={message.time} /> // key - TEST
+              <TheirPhrase item={message} key={message.id} />
             )
           )}
         </div>
-        <div ref={el => this.messagesEndRef = el}></div>
+        <div ref={this.messagesEndRef} />
         <div className={classes.messageInput}>
-            <InputBase
-              multiline
-              value={text}
-              placeholder="Enter your message"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              onChange={this.handleInputChange}
-            />
-            {text ? (
-              <IconButton
-                classes={{ root: classes.buttonRoot }}
-                onClick={this.handleInputButton}
-              >
-                <ArrowForward classes={{ root: classes.iconRoot }} />
-              </IconButton>
-            ) : null}
+          <InputBase
+            multiline
+            value={text}
+            placeholder="Enter your message"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
+            }}
+            onChange={this.handleInputChange}
+          />
+          {text ? (
+            <IconButton
+              classes={{ root: classes.buttonRoot }}
+              onClick={this.handleInputButton}
+            >
+              <ArrowForward classes={{ root: classes.iconRoot }} />
+            </IconButton>
+          ) : null}
         </div>
       </div>
     );
   }
+}
+
+interface ThisDialogUsers {
+  [key: number]: UserInfo | null;
+}
+
+const compareByDate = (a: MessageInfo, b: MessageInfo) => {
+  const dateA = new Date(a.date);
+  const dateB = new Date(b.date);
+  return dateA.getTime() - dateB.getTime();
 }
 
 const getMessagesWithAuthor = createSelector<
@@ -157,20 +175,37 @@ const getMessagesWithAuthor = createSelector<
 >(
   state => state.messages.messages,
   state => state.users.users,
-  (messages, users) =>
-    messages.map(message => {
-      const messageAuthor = users.find(user => user.id === message.user_id);
-      const authorFirstName = messageAuthor ? messageAuthor.first_name : "";
-      const authorLastName = messageAuthor ? messageAuthor.last_name : "";
-      const authorAvatar = messageAuthor ? messageAuthor.avatar : null;
+  (messages, users) => {
+    const thisDialogUsers: ThisDialogUsers = {};
+    const author: Pick<UserInfo, 'first_name' | 'last_name' | 'avatar'> = {
+      first_name: '',
+      last_name: '',
+      avatar: null
+    };
+    const sortedByDateMessages = messages.sort(compareByDate);
+    return sortedByDateMessages.map(message => {
+      console.log(message.date);
+      const thisDialogUser = thisDialogUsers[message.user_id];
+      if (thisDialogUser) {
+        author.first_name = thisDialogUser.first_name;
+        author.last_name = thisDialogUser.last_name;
+        author.avatar = thisDialogUser.avatar;
+      } else {
+        const messageAuthor = users.find(user => user.id === message.user_id);
+
+        author.first_name = messageAuthor ? messageAuthor.first_name : "";
+        author.last_name = messageAuthor ? messageAuthor.last_name : "";
+        author.avatar = messageAuthor ? messageAuthor.avatar : null;
+
+        thisDialogUsers[message.user_id] = messageAuthor || null;
+      }
 
       return {
         ...message,
-        firstName: authorFirstName,
-        lastName: authorLastName,
-        avatar: authorAvatar
+        ...author
       };
-    })
+    });
+  }
 );
 
 const mapStateToProps = (state: AppState) => ({
